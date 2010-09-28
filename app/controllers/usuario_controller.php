@@ -39,9 +39,8 @@ class UsuarioController extends ApplicationController {
             }
             return false;
         } else {
-            $usuario = new Usuario();
-            $login = $usuario->getUserLogged()->login;
-            Router::redirect('usuario/' . $login);
+            $usuario = new Usuario();            
+            Router::redirect('usuario/' .  $usuario->getUserLogged()->login);
         }
     }
 
