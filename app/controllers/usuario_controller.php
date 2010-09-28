@@ -1,6 +1,6 @@
 <?php
 
-Load::models('usuario','usuario_extendida');
+Load::models('usuario', 'usuario_extendida');
 
 class UsuarioController extends ApplicationController {
 
@@ -12,17 +12,18 @@ class UsuarioController extends ApplicationController {
      * Muestra la información del usuario, es consultado
      * a traves de sus nombre de usuario(login)
      */
+
     public function perfil($login=null) {
         if ($login) {
             $usuario = new Usuario();
-            if(!$this->usuario = $usuario->find_first("login='$login'")){
+            if (!$this->usuario = $usuario->find_first("login='$login'")) {
                 Flash::warning("No existe un usuario con este nombre de usuario: $login");
-            }else{
+            } else {
                 //Consulta la información extendida del usuario
                 $extendida = new UsuarioExtendida();
                 $this->extendida = $extendida->find("usuario_id = $usuario->id");
             }
-        }else{
+        } else {
             Flash::warning("No ha usuado un nombre de usuario valido");
         }
     }
@@ -31,18 +32,19 @@ class UsuarioController extends ApplicationController {
      * Iniciar sesion para los invitados
      */
     public function login() {
-        //if(Input::hasPost('txt_login')){
-            Load::lib('SdAuth');
-            if (!SdAuth::isLogged()) {
-                Flash::error(SdAuth::getError());                
-                return false;
-            }else{
-                $usuario = new Usuario();
-                $login = $usuario->getUserLogged()->login;
-                Router::redirect('usuario/'. $login);
+        Load::lib('SdAuth');
+        if (!SdAuth::isLogged()) {
+            if (SdAuth::getError()) {
+                Flash::error(SdAuth::getError());
             }
-        //}
+            return false;
+        } else {
+            $usuario = new Usuario();
+            $login = $usuario->getUserLogged()->login;
+            Router::redirect('usuario/' . $login);
+        }
     }
+
 }
 
 ?>
