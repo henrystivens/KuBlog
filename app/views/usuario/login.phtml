@@ -1,0 +1,35 @@
+<?php View::content(); ?>
+<div class="div_login">                
+    <form method="post">
+        <input name="mode" type="hidden" value="auth_login" />
+        <div class="dialog">
+            <table>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="nombre_de_usuario">Nombre de usuario:</label>
+                                </td>
+                                <td valign="top" class="value">
+                                    <?php echo Form::text('txt_login', 'class: a') ?>
+                                </td>
+                            </tr>
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="contrasenna">Contrase&ntilde;a:</label>
+                                </td>
+                                <td valign="top" class="value">
+                                    <?php echo Form::pass('txt_password', 'class: a') ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="buttons">
+            <span class="button"><?php echo Form::submit('Iniciar sesi&oacute;n', 'class=save') ?></span>
+        </div>
+    </form>
+</div>
