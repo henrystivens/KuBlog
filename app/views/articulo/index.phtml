@@ -12,9 +12,10 @@ Load::lib('helpers');
         <footer>
         <?php
         if ($articulo->habilitar_comentarios == 1) {
-            echo Html::link("nuevo_comentario/{$articulo->rutaSimple()}", "($articulo->numero_comentarios) Comentarios");
-        }
+            echo Html::link($articulo->ruta().'#comentarios', "($articulo->numero_comentarios) Comentarios");//echo Html::link("nuevo_comentario/{$articulo->rutaSimple()}", "($articulo->numero_comentarios) Comentarios");
+        }        
         ?>
+        | (<?php echo $articulo->numero_de_lecturas; ?>) Lecturas
     </footer>
     <br /><hr /><br />
 </article>        
