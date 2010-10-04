@@ -7,6 +7,9 @@
 <?php foreach ($comentarios as $comment): ?>
 
         <div class="comment" id="c<?php echo $comment->id; ?>">
+            <div class="avatar" style="float: left; margin: 0px 5px;">
+                <?php echo KuHelper::gravatar($comment->email);?>
+            </div>
             <div class="content">
                 <strong>
                     <a name="<?php echo strtotime($comment->creado_at) ?>"></a><a href='<?php echo $comment->url ?>' title="<?php echo $comment->autor; ?>"><?php echo $comment->autor; ?></a>
