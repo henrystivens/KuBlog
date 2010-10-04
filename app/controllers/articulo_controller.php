@@ -48,6 +48,10 @@ class ArticuloController extends ApplicationController {
             $this->comentarios = Load::model('comentario')->getCommentByPost($this->articulo->id);
             $this->countComment = count($this->comentarios);
             $this->captcha = $recaptcha->generar();
+
+            $this->articulo->numero_de_lecturas = $this->articulo->numero_de_lecturas + 1;
+            $this->articulo->update();
+
         } else if($categoria_nombre){
             Router::route_to('action: index');
         }else{
