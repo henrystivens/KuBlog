@@ -1,0 +1,47 @@
+<h3>Editar pefil</h3>
+<div class="form">
+    <?php View::content(); ?>
+    <?php echo Form::open("usuario/edit/") ?>
+
+    <div class="row">
+        <label for="usuario_nombre">Nombre corto</label>
+        <?php echo Form::text('usuario.nombre', "size='40'") ?>
+    </div>
+
+    <div class="row">
+        <label for="usuario_mail">Correo</label>
+        <?php echo Form::text('usuario.mail', "size='40'") ?>
+    </div>
+
+    <div class="row">
+        <label for="usuario_avatar">Avatar</label>
+        <?php echo Form::text('usuario.avatar', "size='40'") ?>
+    </div>
+    <hr>
+    <div class="row">
+        <label for="usuario_extendida_nombre">Nombre</label>
+        <?php echo Form::text('usuario_extendida.nombre', "size='40'") ?>
+    </div>
+    <div class="row">
+        <label for="usuario_extendida_apellido">Apellido</label>
+        <?php echo Form::text('usuario_extendida.apellido', "size='40'") ?>
+    </div>
+     <div class="row">
+        <label for="usuario_extendida_sexo">Sexo</label>
+        <?php echo Form::select('usuario_extendida.sexo', array('0'=>'- seleccione -','Mujer'=>'Mujer','Hombre'=>'Hombre')) ?>
+    </div>
+    <div class="row">
+        <label for="usuario_extendida_barrio">Barrio</label>
+        <?php echo Form::text('usuario_extendida.barrio', "size='40'") ?>
+    </div>
+    <div class="row">
+        <label for="usuario_extendida_celular">Celular</label>
+        <?php echo Form::text('usuario_extendida.celular', "size='40'") ?>
+    </div>
+
+    <div class="row action">        
+        <?php echo Form::hidden('usuario.id') ?>
+        <?php echo Form::submit('Enviar') ?>
+    </div>
+    <?php echo Form::close() ?>
+</div>

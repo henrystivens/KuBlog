@@ -99,7 +99,11 @@ class Usuario extends ActiveRecord {
      * Retorna el usuario que ha iniciado sesion
      */
     public function getUserLogged() {
-        return $this->find_first('id=' . Auth::get('id'));
+        if(Auth::get()){
+            return $this->find_first('id=' . Auth::get('id'));
+        }else{
+            return false;
+        }
     }
 
 }

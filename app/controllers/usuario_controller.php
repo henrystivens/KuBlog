@@ -8,11 +8,10 @@ class UsuarioController extends ApplicationController {
 
     }
 
-    /*
+    /**
      * Muestra la información del usuario, es consultado
      * a traves de sus nombre de usuario(login)
      */
-
     public function perfil($login=null) {
         if ($login) {
             $usuario = new Usuario();
@@ -29,6 +28,19 @@ class UsuarioController extends ApplicationController {
     }
 
     /**
+     * Edita la información básica y extendida del usario.
+     */
+    public function edit() {
+        if ($id = Auth::get('id')) {
+            $usuario = new Usuario();
+            $usuario_extendida = new UsuarioExtendida();
+
+            $this->usuario = $usuario->find($id);
+            $this->user_extend = $usuario_extendida->find_by_usuario_id($this->usuario->id);
+        }
+    }
+
+    /**
      * Iniciar sesion para los invitados
      */
     public function login() {
@@ -39,8 +51,8 @@ class UsuarioController extends ApplicationController {
             }
             return false;
         } else {
-            $usuario = new Usuario();            
-            Router::redirect('usuario/' .  $usuario->getUserLogged()->login);
+            $usuario = new Usuario();
+            Router::redirect('usuario/' . $usuario->getUserLogged()->login);
         }
     }
 
