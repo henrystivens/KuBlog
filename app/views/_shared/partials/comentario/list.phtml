@@ -6,18 +6,15 @@
 
 <?php foreach ($comentarios as $comment): ?>
 
-        <div class="comment" id="c<?php echo $comment->id; ?>">
-            <div class="avatar" style="float: left; margin: 0px 5px;">
-                <?php echo KuHelper::gravatar($comment->email);?>
-            </div>
-            <div class="content">
-                <strong>
-                    <a name="<?php echo strtotime($comment->creado_at) ?>"></a><a href='<?php echo $comment->url ?>' title="<?php echo $comment->autor; ?>"><?php echo $comment->autor; ?></a>
-                </strong>
-        <?php echo $comment->comentario; ?>
+        <div class="comment" id="<?php echo strtotime($comment->creado_at) ?>">
+    <?php echo KuHelper::gravatar($comment->email, $comment->autor); ?>
+            <p>
+        <strong>
+            <a href='<?php echo $comment->url ?>' title="<?php echo $comment->autor; ?>"><?php echo $comment->autor; ?></a>
+        </strong>
+    <?php echo $comment->comentario; ?>
+</p>
+    <?php echo strftime("%e de %B del %Y, a las %R", strtotime($comment->creado_at)); ?>
+
     </div>
-    <div class="time">
-        <?php echo strftime("%e de %B del %Y, a las %R", strtotime($comment->creado_at)); ?>
-    </div>
-</div>
 <?php endforeach; ?>

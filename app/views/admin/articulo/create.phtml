@@ -42,9 +42,7 @@
     <?php echo Form::close() ?>
     </div>
 <?php echo Tag::js('jquery/jquery.tag.editor'); ?>
-<?php //echo Tag::js('jquery/ui/jquery-ui-1.8.1.custom'); ?>
-<?php //echo Tag::js('elrte/elrte.min'); ?>
-<?php //echo Tag::js('elrte/i18n/elrte.es'); ?>
+
 <script type="text/javascript">
     $(function() {
         $("#tags").tagEditor(
@@ -54,14 +52,6 @@
             completeOnSeparator: true,
             completeOnBlur: true
         });
-        //Para el editor
-        /*var opts = {
-            lang         : 'es',   // set your language
-            styleWithCss : true,
-            height       : 400,
-            toolbar      : 'complete'
-        };
-        // create editor
-        $('#articulo_contenido').elrte(opts);*/
+         
     });
-</script>
+</script> 

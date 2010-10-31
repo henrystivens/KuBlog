@@ -19,7 +19,7 @@
  * @see Cache
  */
 Load::lib('cache');
-Load::models('perfil');
+
 class Articulo extends ActiveRecord {
     const STATUS_DRAFT=0;
     const STATUS_PUBLISHED=1;
@@ -65,20 +65,6 @@ class Articulo extends ActiveRecord {
         $obj->$method();
 
         return $obj;
-
-        /* if($obj->$method()){
-          return $obj;
-          }
-
-          return false; */
-        /* try {
-          $obj->$method();
-          //Input::delete('menus'); //TODO ¿por qué menus?
-          return $obj;
-          } catch (Exception $e) {
-          Flash::error('Error creando/actualizando el artículo');
-          }
-          return false; */
     }
 
     /**
@@ -88,10 +74,11 @@ class Articulo extends ActiveRecord {
      * @return ResultSet
      */
     public function getAllPost($page=1, $ppage=10, $estado=null) {
-        //Obtiene el usuario
-        $user = Load::model('usuario')->getUserLogged();
-        //Si el usuario es Administrador, lista todos los artículos
-        if ($user->hasProfile(Perfil::ADMINISTRADOR) || $user->hasProfile(Perfil::EDITOR)) {
+        //Obtiene el rol
+        $rol_usuario = Load::model('rol_usuario')->find_first('usuario_id = ' . Auth::get('id'));
+        $rol = $rol_usuario->getRol()->nombre;
+        //Si el usuario es Administrador o editor, lista todos los artículos
+        if ($rol == 'administrador' || $rol == 'editor') {
             if ($estado == null) {
                 return $this->paginate("page: $page",
                         "per_page: $ppage",
@@ -104,12 +91,12 @@ class Articulo extends ActiveRecord {
             }
         } else {
             if ($estado == null) {
-                return $this->paginate("conditions: usuario_id={$user->id}",
+                return $this->paginate('conditions: usuario_id=' . Auth::get('id'),
                         "page: $page",
                         "per_page: $ppage",
                         'order: creado_at desc');
             } else {
-                return $this->paginate("conditions: usuario_id={$user->id} ".
+                return $this->paginate('conditions: usuario_id=' . Auth::get('id'),
                         "AND estado={$estado}",
                         "page: $page",
                         "per_page: $ppage",
@@ -197,9 +184,12 @@ class Articulo extends ActiveRecord {
         }
         //Si el usuario es colaborador no permite publicar, lo deja en estado
         //pendiente.
-        $user = Load::model('usuario')->getUserLogged();
-        if ($user->hasProfile(Perfil::COLABORADOR)) {
-            $this->estado = Articulo::STATUS_PENDING;
+        if ($user = Auth::get_active_identity()) {
+            //Obtiene el perfil
+            $perfil = Load::model('perfil')->find(Auth::get('perfil_id'));
+            if ($perfil->nombre == Perfil::COLABORADOR) {
+                $this->estado = Articulo::STATUS_PENDING;
+            }
         }
     }
 

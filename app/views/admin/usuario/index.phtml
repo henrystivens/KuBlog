@@ -6,8 +6,8 @@
     <li>
         <strong><?php echo $item->login ?></strong>
         <a href="#">Editar</a>
-        <?php echo Html::link("usuarios/del/$item->id/", 'Borrar') ?>
-        <a href="#" title='Nombre del Grupo'><?php echo $item->getPerfil()->nombre ?></a>        
+        <?php echo Html::link("usuario/eliminar/$item->id/", 'Borrar') ?>
+        <a href="#" title='Nombre del Grupo'><?php //echo $item->getPerfil()->nombre ?></a>
     </li>
     <?php endforeach; ?>
     </ul>

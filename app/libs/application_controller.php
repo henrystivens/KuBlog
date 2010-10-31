@@ -35,9 +35,9 @@ class ApplicationController extends Controller {
     public function logout () {
         Load::lib('SdAuth');
         SdAuth::logout();
-        View::template('login2');
-        Router::redirect('');
-    }
+        //View::template('login');
+        Router::redirect('/');
+    }   
 
     public function contact() {
         Load::model('correo');

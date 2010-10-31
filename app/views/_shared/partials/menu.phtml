@@ -16,11 +16,11 @@
 </script>
 
 <ul class="dropdown dropdown-horizontal">
-    <?php foreach (Load::model('controlador')->getMenu(Auth::get('perfil_id')) as $item): ?>
+    <?php foreach (Load::model('recurso')->getMenu(Auth::get('perfil_id')) as $item): ?>
         <li>
             <a href='#' title="<?php echo $item->Menu()->titulo ?>"><?php echo $item->Menu()->nombre ?></a>
             <ul>
-            <?php foreach (Load::model('controlador')->getSubMenu(Auth::get('perfil_id'), $item->Menu()->id) as $controlador): ?>
+            <?php foreach (Load::model('recurso')->getSubMenu(Auth::get('perfil_id'), $item->Menu()->id) as $controlador): ?>
             <?php if ($controlador->url == 'null') {
  ?>
                     <li class="empty"><?php echo $controlador->nombre ?></li>

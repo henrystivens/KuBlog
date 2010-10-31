@@ -220,3 +220,8 @@ hr {
     background-color: #FEEFB3;
     background-image: url('../../img/default/warning.png');
 }
+
+.avatar {
+    float: left;
+    margin: 0px 5px;
+}

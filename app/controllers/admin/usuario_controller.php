@@ -14,7 +14,7 @@
  *
  * @author Deivinson Tejeda <deivinsontejeda@gmail.com>
  */
-Load::models('usuario', 'perfil');
+Load::models('usuario');
 
 class UsuarioController extends ApplicationController {
 
@@ -66,11 +66,11 @@ class UsuarioController extends ApplicationController {
     }
 
     /**
-     * Borra un Usuario del Sistema de forma logica
+     * Elimina un Usuario del sistema de forma logica
      *
      * @param int $id
      */
-    public function del($id = null) {
+    public function eliminar($id = null) {
         $usuarios = new Usuarios();
         if ($id) {
             //Buscando el Objeto a Borrar
@@ -109,7 +109,7 @@ class UsuarioController extends ApplicationController {
         if (Input::hasPost('login') && $this->Usuarios->loginExist(Input::post('login'))) {
             Load::library('mail');
             $this->passNew = Mail::generarClave(6);
-            $this->usuario = $usuarios->updateUsuarioByMail(Input::post('login'), $this->passNew);
+            $this->usuario = $usuarios->updateUsuarioByMail(Input::post('mail'), $this->passNew);
             View::select('mailer');
         }
     }

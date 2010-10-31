@@ -17,9 +17,10 @@
 class Usuario extends ActiveRecord {
 
     public function initialize() {
-        //relaciones
-        $this->belongs_to('perfil');
-        $this->validates_email_in('mail', array('message' => 'Campo mail incorrecto'));
+        //Relaciones
+        $this->has_many('rol_usuario');
+        //Validaciones
+        $this->validates_email_in('mail', array('message' => 'Campo de correo electrónico incorrecto'));
     }
 
     /**
@@ -67,7 +68,7 @@ class Usuario extends ActiveRecord {
      * @return bool
      */
     public function loginExist($mail) {
-        return $this->exists("login='$mail'");
+        return $this->exists("email='$mail'");
     }
 
     /**
@@ -77,8 +78,8 @@ class Usuario extends ActiveRecord {
      * @param string $pass
      * @return resulset
      */
-    public function updateUsuarioByMail($login, $pass) {
-        $this->find_first("login='$login'");
+    public function updateUsuarioByMail($mail, $pass) {
+        $this->find_first("mail='$mail'");
         $this->password = hash('sha1', $pass);
         $this->update();
         return $this;

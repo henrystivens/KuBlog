@@ -6,7 +6,7 @@ Load::lib('auth');
 ?>
 
 <div id='head-user'>
-    <h1>KuBlog</h1><div id='title2'>Sistema de blog potenciado por KumbiaPHP</div>
+    <h1><?php echo Html::link('admin/', 'KuBlog', "title='KuBlog, Sistema de blog potenciado por KumbiaPHP'"); ?></h1><div id='title2'>Sistema de blog potenciado por KumbiaPHP</div>
     <div class='alignright'>
         <p id='info-user'>
             <span class='info-user'>Hola <?php echo Auth::get('nombre');//echo Auth::get('login') ?></span>

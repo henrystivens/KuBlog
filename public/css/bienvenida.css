@@ -173,6 +173,11 @@ body{
     color: #fff;
 }
 
+#head-user h1 a{
+    color: #fff;
+    text-decoration: none;
+}
+
 .app-user {
     font-size: 30px;
     margin: 0;

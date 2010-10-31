@@ -16,11 +16,17 @@
 class Correo {
 
     //Atributos para el envio de correo (acceso privado)
-    private static $_userName = 'no-reply@youdomain.com'; // mail username
-    private static $_password = 'pass'; // mail password
-    private static $_from = 'fromm';
-    private static $_host = 'host';
-    private static $_port = '465';
+    /*private static $_userName = 'no-reply@simacel.com'; // mail username
+    private static $_password = 'no-reply'; // mail password
+    private static $_from = 'simacel.com';
+    private static $_host = 'host318.hostmonster.com';
+    private static $_port = '465';*/
+    private $_userName = '';
+    private $_password = '';
+    private $_from = '';
+    private $_host = '';
+    private $_port = '';
+
     /**
      * Quien envia el Mail
      * @var $fromName
@@ -31,6 +37,15 @@ class Correo {
      * @var $subject
      */
     //public static $subject = 'Envio de Clave de Acceso';
+
+    public function Correo(){
+        Config::read("kublog");
+        $_userName = Config::get("kublog.mail.username");
+        $_password = Config::get("kublog.mail.password");
+        $_from = Config::get("kublog.mail.from");
+        $_host =Config::get("kublog.mail.host");
+        $_port = Config::get("kublog.mail.port");
+    }
 
     /**
      * Genera Claves aleatorias...
